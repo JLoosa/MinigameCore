@@ -12,7 +12,7 @@ public class ArenaManager {
 	private Set<AbstractArena> arenas;
 	Set<AbstractArena> removals;
 	private boolean disableRunnable = false;
-	
+
 	private ArenaManager() {
 		arenas = new HashSet<AbstractArena>();
 		removals = new HashSet<AbstractArena>();
@@ -34,10 +34,9 @@ public class ArenaManager {
 
 	public void removeAllArenasOfType(Class<? extends AbstractArena> clazz) {
 		if (arenas.isEmpty()) return;
-		for (AbstractArena arena : arenas) {
-			if (arena.getClass().getName().equals(clazz.getName()))
+		for (AbstractArena arena : arenas)
+			if (arena.getClass().isInstance(clazz))
 				removals.add(arena);
-		}
 	}
 
 	private void startTimings() {
@@ -46,8 +45,9 @@ public class ArenaManager {
 			private int second = 0;
 			private boolean tickSecond = false;
 			private boolean tickMinute = false;
+
 			public void run() {
-				if(disableRunnable) {
+				if (disableRunnable) {
 					cancel();
 					return;
 				}
@@ -81,8 +81,8 @@ public class ArenaManager {
 
 	public void onDisable() {
 		disableRunnable = true;
-		if(arenas.isEmpty()) return;
-		for(AbstractArena arena : arenas) {
+		if (arenas.isEmpty()) return;
+		for (AbstractArena arena : arenas) {
 			arena.onEnd();
 		}
 		arenas.clear();

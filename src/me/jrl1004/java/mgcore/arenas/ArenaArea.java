@@ -76,4 +76,9 @@ public class ArenaArea {
 	public Vector getMaximumPoints() {
 		return maximumVector.clone();
 	}
+
+	@Override
+	protected ArenaArea clone() {
+		return new ArenaArea(world, minimumVector, maximumVector);
+	}
 }

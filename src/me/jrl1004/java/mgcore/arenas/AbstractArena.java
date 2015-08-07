@@ -10,6 +10,10 @@ public abstract class AbstractArena {
 	public void setGameArea(ArenaArea area) {
 		this.area = area;
 	}
+	
+	public ArenaArea getArea() {
+		return area.clone();
+	}
 
 	/**
 	 * Called once every server tick
