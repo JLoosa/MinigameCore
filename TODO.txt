@@ -1,22 +1,16 @@
-Waypoints:
-  - Waypoint Storage
-  - Track Player Waypoint Progression
-    - Linear (Eg Races)
-    - Nonlinear (Eg scavenger hunt)
-  - Store current waypoint number per player  
+Waypoints (75%):
+  - Waypoint Storage ✓
+  - Linear (Eg Races)
+  - Nonlinear (Eg scavenger hunt) ✓
 
-Inventories
+Inventories (0%):
   - Custom dynamic inventories
   - Easy-to-use inventory-based selection system
   - support for different types of inventory access
     - On-call (new inventory per call of method)
     - Always-Active (stored inventory object that is returned instead of replaced)
 
-Arenas
-  - Abstract SerializableArena class
-    - Support saving to file and loading from file using a map  and/or string
-
-Teams
+Teams (0%):
   - Built-in multi-team system
   - Support adding and removing players
   - Retrieve team by
@@ -30,7 +24,7 @@ Teams
   - Support for team prefixes (in chat)
   - Support for team name colors (using scoreboards)
 
-Kits:
+Kits (0%):
   - Support for creating kits based off of an initial kit class
   - Support for storing a player's active kit (if the arena is using a kit system)
   - Support for setting the player's stats and inventory to that of the kit

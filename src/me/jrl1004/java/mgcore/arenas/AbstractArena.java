@@ -1,17 +1,19 @@
 package me.jrl1004.java.mgcore.arenas;
 
+import me.jrl1004.java.mgcore.arenas.regions.CuboidRegion;
+
 public abstract class AbstractArena {
 
-	private ArenaArea area;
+	private CuboidRegion area;
 
 	public AbstractArena() {
 	}
 	
-	public void setGameArea(ArenaArea area) {
+	public void setGameArea(CuboidRegion area) {
 		this.area = area;
 	}
 	
-	public ArenaArea getArea() {
+	public CuboidRegion getArea() {
 		return area.clone();
 	}
 

@@ -1,36 +1,42 @@
-package me.jrl1004.java.mgcore.arenas;
+package me.jrl1004.java.mgcore.arenas.regions;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
 
-public class ArenaArea {
+public class CuboidRegion extends AbstractRegion {
+
 	private World world;
 	private Vector pointOne;
 	private Vector pointTwo;
 	private Vector minimumVector;
 	private Vector maximumVector;
 
-	public ArenaArea(World world, Vector point1, Vector point2) {
+	public CuboidRegion(World world, Vector point1, Vector point2) {
 		this.world = world;
 		this.pointOne = point1;
 		this.pointTwo = point2;
 		updateArea();
 	}
 
-	public ArenaArea setPointOne(Vector point1) {
+	public CuboidRegion() {
+		this.world = null;
+		this.pointOne = this.pointTwo = this.minimumVector = this.maximumVector = null;
+	}
+
+	public CuboidRegion setPointOne(Vector point1) {
 		this.pointOne = point1;
 		updateArea();
 		return this;
 	}
 
-	public ArenaArea setPointTwo(Vector point2) {
+	public CuboidRegion setPointTwo(Vector point2) {
 		this.pointTwo = point2;
 		updateArea();
 		return this;
 	}
 
-	public ArenaArea setWorld(World world) {
+	public CuboidRegion setWorld(World world) {
 		this.world = world;
 		return this;
 	}
@@ -42,7 +48,10 @@ public class ArenaArea {
 		this.maximumVector = new Vector(Math.max(pointOne.getX(), pointTwo.getX()), Math.max(pointOne.getY(), pointTwo.getY()), Math.max(pointOne.getZ(), pointTwo.getZ()));
 	}
 
-	public boolean pointIsInArea(Location location) {
+	public boolean pointIsInRegion(Location location) {
+		if (world == null) return false;
+		if (minimumVector == null) return false;
+		if (maximumVector == null) return false;
 		if (!pointIsInWorld(location)) return false;
 		if (!pointIsWithinYBounds(location)) return false;
 		if (!pointIsWithinXBounds(location)) return false;
@@ -51,20 +60,30 @@ public class ArenaArea {
 	}
 
 	public boolean pointIsInWorld(Location location) {
+		if (world == null) return false;
 		return location.getWorld().equals(world);
 	}
 
 	public boolean pointIsWithinXBounds(Location location) {
+		if (!pointIsInWorld(location)) return false;
+		if (minimumVector == null) return false;
+		if (maximumVector == null) return false;
 		if (location.getX() < minimumVector.getX()) return false;
 		return location.getX() <= maximumVector.getX();
 	}
 
 	public boolean pointIsWithinYBounds(Location location) {
+		if (!pointIsInWorld(location)) return false;
+		if (minimumVector == null) return false;
+		if (maximumVector == null) return false;
 		if (location.getY() < minimumVector.getY()) return false;
 		return location.getY() <= maximumVector.getY();
 	}
 
 	public boolean pointIsWithinZBounds(Location location) {
+		if (!pointIsInWorld(location)) return false;
+		if (minimumVector == null) return false;
+		if (maximumVector == null) return false;
 		if (location.getZ() < minimumVector.getZ()) return false;
 		return location.getZ() <= maximumVector.getZ();
 	}
@@ -78,7 +97,7 @@ public class ArenaArea {
 	}
 
 	@Override
-	protected ArenaArea clone() {
-		return new ArenaArea(world, minimumVector, maximumVector);
+	public CuboidRegion clone() {
+		return new CuboidRegion(world, minimumVector, maximumVector);
 	}
 }
