@@ -17,7 +17,7 @@ public class ModularScoreboard {
 	private List<String> scoreboardText;
 	private String title;
 
-	protected ModularScoreboard() {
+	public ModularScoreboard() {
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		scoreboardText = new ArrayList<String>();
 		title = null;

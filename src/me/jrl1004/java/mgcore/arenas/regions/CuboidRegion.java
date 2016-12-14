@@ -100,4 +100,9 @@ public class CuboidRegion extends AbstractRegion {
 	public CuboidRegion clone() {
 		return new CuboidRegion(world, minimumVector, maximumVector);
 	}
+
+	@Override
+	public World getWorld() {
+		return world;
+	}
 }

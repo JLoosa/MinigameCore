@@ -3,12 +3,10 @@ package me.jrl1004.java.mgcore.world;
 import java.util.List;
 import java.util.Stack;
 
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockEvent;
-import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -50,8 +48,6 @@ public class WorldBackup {
 		if (!extensiveLogging) return; // Only extensive logging is done below this point
 		if (event instanceof BlockBurnEvent)
 			storeBlockBurnEvent((BlockBurnEvent) event);
-		if (event instanceof BlockExplodeEvent)
-			storeBlockExplodeEvent((BlockExplodeEvent) event);
 		if (event instanceof BlockFadeEvent)
 			storeBlockFadeEvent((BlockFadeEvent) event);
 		if (event instanceof BlockPhysicsEvent)
@@ -60,15 +56,15 @@ public class WorldBackup {
 			storeBlockFromToEvent((BlockFromToEvent) event);
 		if (event instanceof BlockFormEvent)
 			storeBlockFormEvent((BlockFormEvent) event);
-		if(event instanceof BlockGrowEvent)
+		if (event instanceof BlockGrowEvent)
 			storeBlockGrowEvent((BlockGrowEvent) event);
-		if(event instanceof BlockMultiPlaceEvent)
+		if (event instanceof BlockMultiPlaceEvent)
 			storeBlockMultiPlaceEvent((BlockMultiPlaceEvent) event);
-		if(event instanceof BlockSpreadEvent)
+		if (event instanceof BlockSpreadEvent)
 			storeBlockSpreadEvent((BlockSpreadEvent) event);
-		if(event instanceof LeavesDecayEvent)
+		if (event instanceof LeavesDecayEvent)
 			storeLeavesDecayEvent((LeavesDecayEvent) event);
-		if(event instanceof EntityBlockFormEvent)
+		if (event instanceof EntityBlockFormEvent)
 			storeEntityBlockFormEvent((EntityBlockFormEvent) event);
 	}
 
@@ -145,14 +141,6 @@ public class WorldBackup {
 		states.push(event.getBlock().getState());
 	}
 
-	private void storeBlockExplodeEvent(BlockExplodeEvent event) {
-		states.push(event.getBlock().getState());
-		if (!event.blockList().isEmpty()) {
-			for (Block b : event.blockList())
-				states.push(b.getState());
-		}
-	}
-
 	private void storeBlockFadeEvent(BlockFadeEvent event) {
 		states.push(event.getNewState());
 	}
@@ -190,7 +178,7 @@ public class WorldBackup {
 	private void storeLeavesDecayEvent(LeavesDecayEvent event) {
 		states.push(event.getBlock().getState());
 	}
-	
+
 	private void storeEntityBlockFormEvent(EntityBlockFormEvent event) {
 		states.push(event.getNewState());
 	}

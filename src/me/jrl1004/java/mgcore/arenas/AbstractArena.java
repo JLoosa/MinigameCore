@@ -1,20 +1,26 @@
 package me.jrl1004.java.mgcore.arenas;
 
+import me.jrl1004.java.mgcore.arenas.regions.AbstractRegion;
 import me.jrl1004.java.mgcore.arenas.regions.CuboidRegion;
 
 public abstract class AbstractArena {
 
-	private CuboidRegion area;
+	protected AbstractRegion area;
 
 	public AbstractArena() {
+		this(false);
 	}
-	
+
+	public AbstractArena(boolean register) {
+		if (register) ArenaManager.getInstance().registerArena(this);
+	}
+
 	public void setGameArea(CuboidRegion area) {
 		this.area = area;
 	}
-	
-	public CuboidRegion getArea() {
-		return area.clone();
+
+	public AbstractRegion getArea() {
+		return area.clone();	
 	}
 
 	/**
@@ -51,6 +57,24 @@ public abstract class AbstractArena {
 	 * Called when the arena is told to disable itself
 	 */
 	public void onDisable() {
+	}
+
+	/**
+	 * Called once every 20th of a second
+	 */
+	public void onAsyncTick() {
+	}
+
+	/**
+	 * Called once each second
+	 */
+	public void onAsyncSecond() {
+	}
+
+	/**
+	 * Called once every 60 seconds or each minute
+	 */
+	public void onAsyncMinute() {
 	}
 
 }

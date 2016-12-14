@@ -4,6 +4,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class PlayerBackup {
 
@@ -15,6 +16,7 @@ public class PlayerBackup {
 	private GameMode gameMode;
 	private ItemStack[] inventory;
 	private ItemStack[] armor;
+	private Scoreboard scoreboard;
 
 	public PlayerBackup(Player player) {
 		this.player = player;
@@ -29,6 +31,7 @@ public class PlayerBackup {
 		this.gameMode = player.getGameMode();
 		this.inventory = player.getInventory().getContents();
 		this.armor = player.getInventory().getArmorContents();
+		this.scoreboard = player.getScoreboard();
 	}
 
 	public void restorePlayer() {
@@ -39,17 +42,7 @@ public class PlayerBackup {
 		player.setGameMode(gameMode);
 		player.getInventory().setArmorContents(armor);
 		player.getInventory().setContents(inventory);
-	}
-
-	public void setToGameDefaults() {
-		player.getInventory().clear();
-		player.setHealth(20);
-		player.setFoodLevel(20);
-		player.setAllowFlight(false);
-		player.setFlying(false);
-		player.setGameMode(GameMode.ADVENTURE);
-		player.setFireTicks(0);
-		player.setTotalExperience(0);
+		player.setScoreboard(scoreboard);
 	}
 
 	public void wipeData() {
@@ -57,5 +50,6 @@ public class PlayerBackup {
 		location = null;
 		inventory = null;
 		armor = null;
+		scoreboard = null;
 	}
 }

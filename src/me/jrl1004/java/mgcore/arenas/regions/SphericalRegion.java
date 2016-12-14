@@ -70,4 +70,9 @@ public class SphericalRegion extends AbstractRegion {
 		this.world = world;
 	}
 
+	@Override
+	public World getWorld() {
+		return world;
+	}
+
 }
